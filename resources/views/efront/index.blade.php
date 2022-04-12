@@ -13,7 +13,7 @@
 
                         <p class="mb-4 pr-5">Kepada pelajar yang menghidapi penyakit covid - 19 perlu diasingkan . Jadi anda perlu menempah bilik untuk kuarantin .</p>
                         <div class="btn-container ">
-                            <a href="appoinment.html"  class="btn btn-main-2 btn-icon btn-round-full">APPLY NOW <i class="icofont-simple-right ml-2  "></i></a>
+                            <a href="{{ route('efront.apply') }}"  class="btn btn-main-2 btn-icon btn-round-full">APPLY NOW <i class="icofont-simple-right ml-2  "></i></a>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                             <span>24 Hours Service</span>
                             <h4 class="mb-3">Online Appoinment</h4>
                             <p class="mb-4">SIla daftar secepat mungkin bagi mengelakkan penularan covid - 19 berlaku .</p>
-                            <a href="appoinment.html" class="btn btn-main btn-round-full">Make a appoinment</a>
+                            <a href="{{ route('efront.apply') }}" class="btn btn-main btn-round-full">Make a appoinment</a>
                         </div>
 
                         <div class="feature-item mb-5 mb-lg-0">
