@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CollegeRequest;
 use App\Models\College;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -38,19 +39,8 @@ class CollegeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CollegeRequest $request,)
     {
-
-        $this->validate($request, [
-            'student_id' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'college' => 'required|string|max:255',
-            'block' => 'required',
-            'room' => 'required|string|max:255',
-            'address' => 'required',
-
-        ]);
-
         $college = new College();
         $college->student_id = $request->student_id;
         $college->name = $request->name;
@@ -60,16 +50,65 @@ class CollegeController extends Controller
         $college->address = $request->address;
         $college->save();
 
-        return redirect()->route('efront.college')->with('success', 'College Information created successfully');
+        return redirect()->route('college.create')->with('success', 'College Information updated successfully');
 
     }
 
     public function search(Request $request)
     {
-        $search = $request->get('search');
-        $search = DB::table('colleges')->where('name', 'like', '%'.$search.'%')->paginate(5);
-        return view('efront.collegeapply',['search' => $search]);
+     if($request->ajax())
+     {
+      $output = '';
+      $query = $request->get('query');
+      if($query != '')
+      {
+       $data = DB::table('colleges')
+         ->where('name', 'like', '%'.$query.'%')
+         ->orWhere('college', 'like', '%'.$query.'%')
+         ->orWhere('block', 'like', '%'.$query.'%')
+         ->orWhere('room', 'like', '%'.$query.'%')
+         ->orWhere('address', 'like', '%'.$query.'%')
+         ->orderBy('id', 'desc')
+         ->get();
 
+      }
+      else
+      {
+       $data = DB::table('colleges')
+         ->orderBy('id', 'desc')
+         ->get();
+      }
+      $total_row = $data->count();
+      if($total_row > 0)
+      {
+       foreach($data as $row)
+       {
+        $output .= '
+        <tr>
+         <td>'.$row->name.'</td>
+         <td>'.$row->college.'</td>
+         <td>'.$row->block.'</td>
+         <td>'.$row->room.'</td>
+         <td>'.$row->address.'</td>
+        </tr>
+        ';
+       }
+      }
+      else
+      {
+       $output = '
+       <tr>
+        <td align="center" colspan="5">No Data Found</td>
+       </tr>
+       ';
+      }
+      $data = array(
+       'table_data'  => $output,
+       'total_data'  => $total_row
+      );
+
+      echo json_encode($data);
+        }
     }
     /**
      * Display the specified resource.
@@ -123,7 +162,7 @@ class CollegeController extends Controller
         $college->address = $request->address;
         $college->save();
 
-        return redirect()->route('')->with('success', 'Covid Information updated successfully');
+        return redirect()->route('')->with('success', 'College Information updated successfully');
     }
 
     /**

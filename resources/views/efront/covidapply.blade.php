@@ -29,7 +29,7 @@
     <div class="container">
       <div class="row" style="width: 100%">
         <div class="testbox">
-        <form action="{{ route('covid.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('covid.saveCovid') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <h4>B. Covid Information</h4>
 
@@ -48,7 +48,7 @@
                     </ul>
                 </div>
             @endif
-            
+
             <div class="form-group row">
             <label for="student_id" class="col-4 col-form-label">Student</label>
             <div class="col-8">

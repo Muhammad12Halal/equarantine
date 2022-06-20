@@ -18,7 +18,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Vaccine information </div>
+                            Vaccine Booster information </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             @php
                             $count = App\Models\Covid::where('vaccine', 'Booster')->count();
@@ -41,7 +41,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            All Students apply</div>
+                            All Students College Apply</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             @php
                                 $count = App\Models\Student::where('quarantine', 'College')->count();

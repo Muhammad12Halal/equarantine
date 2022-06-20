@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <form action="#" method="GET" class="d-none d-sm-inline-block navbar-search" style="margin-bottom: 20px;">
                                 <div class="input-group">
-                                    <input type="search" class="form-control bg-light border-0 small" placeholder="Search for name..."
+                                    <input type="text" name="search" id="search" class="form-control bg-light border-0 small" placeholder="Search for name..."
                                         aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
@@ -62,6 +62,33 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        $(document).ready(function(){
+
+                        fetch_customer_data();
+
+                        function fetch_customer_data(query = '')
+                        {
+                        $.ajax({
+                        url:"{{ route('covid.search') }}",
+                        method:'GET',
+                        data:{query:query},
+                        dataType:'json',
+                        success:function(data)
+                        {
+                            $('tbody').html(data.table_data);
+                            $('#total_records').text(data.total_data);
+                        }
+                        })
+                        }
+
+                        $(document).on('keyup', '#search', function(){
+                        var query = $(this).val();
+                        fetch_customer_data(query);
+                        });
+                        });
+                        </script>
 @endsection
 
 

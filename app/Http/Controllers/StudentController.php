@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class StudentController extends Controller
 {
     /**
@@ -67,12 +68,70 @@ class StudentController extends Controller
     }
 
 
-    public function search(Request $request)
-    {
-        $search = $request->get('search');
-       $posts = DB::table('students')->where('name', 'like', '%'.$search.'%')->paginate(2);
-       return view('admin.student.search', ['posts' =>$posts]);
-    }
+
+// public function search(Request $request)
+//     {
+//      if($request->ajax())
+//      {
+//       $output = '';
+//       $query = $request->get('query');
+//       if($query != '')
+//       {
+//        $data = DB::table('students')
+//          ->where('name', 'like', '%'.$query.'%')
+//          ->orWhere('email', 'like', '%'.$query.'%')
+//          ->orWhere('matric', 'like', '%'.$query.'%')
+//          ->orWhere('phone', 'like', '%'.$query.'%')
+//          ->orWhere('ic', 'like', '%'.$query.'%')
+//          ->orWhere('quarantine', 'like', '%'.$query.'%')
+//          ->orWhere('status', 'like', '%'.$query.'%')
+//          ->orderBy('id', 'desc')
+//          ->get();
+
+//       }
+//       else
+//       {
+//        $data = DB::table('students')
+//          ->orderBy('id', 'desc')
+//          ->get();
+//       }
+//       $total_row = $data->count();
+//       if($total_row > 0)
+//       {
+//        foreach($data as $row)
+//        {
+//         $output .= '
+//         <tr>
+//          <td>'.$row->name.'</td>
+//          <td>'.$row->email.'</td>
+//          <td>'.$row->matric.'</td>
+//          <td>'.$row->phone.'</td>
+//          <td>'.$row->quarantine.'</td>
+//          <td>'.$row->status.'</td>
+//          <td> <a target="_blank" href="images/'.$row->image.'">
+//                 <img src="images/'.$row->image.'" class="img-thumbnail" style="width: 80px; height: 80px;"></a>
+//          </td>
+//         </tr>
+//         ';
+//        }
+//       }
+//       else
+//       {
+//        $output = '
+//        <tr>
+//         <td align="center" colspan="9">No Data Found</td>
+//        </tr>
+//        ';
+//       }
+//       $data = array(
+//        'table_data'  => $output,
+//        'total_data'  => $total_row
+//       );
+
+//       echo json_encode($data);
+//         }
+//     }
+
     /**
      * Display the specified resource.
      *

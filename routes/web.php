@@ -57,10 +57,11 @@ Route::group(['prefix' => 'covid', 'as' => 'covid.'], function () {
     Route::get('/', [CovidController::class, 'index'])->name('index');
     Route::get('/create', [CovidController::class, 'create'])->name('create');
     Route::post('/store', [CovidController::class, 'store'])->name('store');
+    Route::post('/saveCovid', [CovidController::class, 'saveCovid'])->name('saveCovid');
     Route::get('/edit/{id}', [CovidController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [CovidController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [CovidController::class, 'destroy'])->name('destroy');
-    Route::delete('/search', [CovidController::class, 'search'])->name('search');
+    Route::delete('/delete/{id}', [CovidController::class, 'destroy'])->name('destroy');
+    Route::get('/search', [CovidController::class, 'search'])->name('search');
 
 });
 
@@ -72,7 +73,7 @@ Route::group(['prefix' => 'college', 'as' => 'college.'], function () {
     Route::get('/edit/{id}', [CollegeController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [CollegeController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [CollegeController::class, 'destroy'])->name('destroy');
-    Route::delete('/search', [CollegeController::class, 'search'])->name('search');
+    Route::get('/search', [CollegeController::class, 'search'])->name('search');
 
 });
 

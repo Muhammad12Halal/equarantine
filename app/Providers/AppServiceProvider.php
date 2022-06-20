@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+
+use App\Http\Interfaces\UserCovidRepository;
+use App\Http\Repositories\CovidRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(UserCovidRepository::class, CovidRepository::class);
     }
 
     /**
